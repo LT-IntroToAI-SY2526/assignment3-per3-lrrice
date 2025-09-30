@@ -93,7 +93,7 @@ def title_after_year(matches: List[str]) -> List[str]:
 
 
 def director_by_title(matches: List[str]) -> List[str]:
-    title = (matches[0])
+    title = matches[0]
     result = []
 
     for movie in movie_db:
@@ -104,8 +104,9 @@ def director_by_title(matches: List[str]) -> List[str]:
 
 
 def title_by_director(matches: List[str]) -> List[str]:
-    director = int(matches[1])
+
     result = []
+    director = matches[0]
 
     for movie in movie_db:
         if get_director(movie) == director:
@@ -115,27 +116,27 @@ def title_by_director(matches: List[str]) -> List[str]:
 
 
 def actors_by_title(matches: List[str]) -> List[str]:
-    """Finds actors who acted in the passed in movie title
+    result = []
+    title = (matches[0])
 
-    Args:
-        matches - a list of 1 string, just the movie title
-
-    Returns:
-        a list of actors who acted in the passed in title
-    """
-    pass
+    for movie in movie_db:
+        if get_title(movie) == title:
+            result.append(get_actors(movie))
+            break
+    print(result)
+    return result
 
 
 def year_by_title(matches: List[str]) -> List[int]:
-    """Finds year of passed in movie title
+    result = []
+    title = matches[0]
 
-    Args:
-        matches - a list of 1 string, just the movie title
-
-    Returns:
-        a list of one item (an int), the year that the movie was made
-    """
-    pass
+    for movie in movie_db:
+        if get_title(movie) == title:
+            result.append(get_year(movie))
+    
+    print(result)
+    return result
 
 
 def title_by_actor(matches: List[str]) -> List[str]:
