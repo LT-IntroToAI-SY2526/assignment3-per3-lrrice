@@ -51,7 +51,7 @@ def title_by_year(matches: List[str]) -> List[str]:
     for movie in movie_db:
         if get_year(movie) == year:
             result.append(get_title(movie))
-    print(result)
+    
     return result
 
 
@@ -64,7 +64,7 @@ def title_by_year_range(matches: List[str]) -> List[str]:
         movie_year = get_year(movie)
         if starting_year <= movie_year <= ending_year:
             result.append(get_title(movie))
-    print(result)
+    
     return result
 
 
@@ -76,7 +76,7 @@ def title_before_year(matches: List[str]) -> List[str]:
         movie_year = get_year(movie)
         if movie_year < year:
             result.append(get_title(movie))
-    print(result)
+    
     return result
 
 
@@ -88,7 +88,7 @@ def title_after_year(matches: List[str]) -> List[str]:
         movie_year = get_year(movie)
         if year < movie_year:
             result.append(get_title(movie))
-    print(result)
+    
     return result
 
 
@@ -99,7 +99,7 @@ def director_by_title(matches: List[str]) -> List[str]:
     for movie in movie_db:
         if get_title(movie) == title:
             result.append(get_director(movie))
-    print(result)
+    
     return result
 
 
@@ -111,7 +111,7 @@ def title_by_director(matches: List[str]) -> List[str]:
     for movie in movie_db:
         if get_director(movie) == director:
             result.append(get_title(movie))
-    print(result)
+    
     return result
 
 
@@ -121,9 +121,9 @@ def actors_by_title(matches: List[str]) -> List[str]:
 
     for movie in movie_db:
         if get_title(movie) == title:
-            result.append(get_actors(movie))
+            result = (get_actors(movie))
             break
-    print(result)
+
     return result
 
 
@@ -134,21 +134,25 @@ def year_by_title(matches: List[str]) -> List[int]:
     for movie in movie_db:
         if get_title(movie) == title:
             result.append(get_year(movie))
-    
-    print(result)
+
+
     return result
 
 
 def title_by_actor(matches: List[str]) -> List[str]:
-    """Finds titles of all movies that the given actor was in
+    result = []
+    actor_name = matches[0]
 
-    Args:
-        matches - a list of 1 string, just the actor
+    for movie in movie_db:
+        actors = get_actors(movie)
 
-    Returns:
-        a list of movie titles that the actor acted in
-    """
-    pass
+        for actor in actors:
+            if actor_name in actor:
+                result.append(get_title(movie))
+                break
+    
+    
+    return result
 
 
 # dummy argument is ignored and doesn't matter
