@@ -154,6 +154,17 @@ def title_by_actor(matches: List[str]) -> List[str]:
     
     return result
 
+def actors_by_director(matches: List[str]) -> List[str]:
+    result = []
+    director = matches[0]
+
+    for movie in movie_db:
+        if get_director == director:
+            result = get_actors(movie)
+            break
+    
+    return result
+
 
 # dummy argument is ignored and doesn't matter
 def bye_action(dummy: List[str]) -> None:
@@ -175,23 +186,23 @@ pa_list: List[Tuple[List[str], Callable[[List[str]], List[Any]]]] = [
     (str.split("who acted in %"), actors_by_title),
     (str.split("when was % made"), year_by_title),
     (str.split("in what movies did % appear"), title_by_actor),
+    (str.split("who acted in movies directed by %"), actors_by_director),
     (["bye"], bye_action),
 ]
 
 
 def search_pa_list(src: List[str]) -> List[str]:
-    """Takes source, finds matching pattern and calls corresponding action. If it finds
-    a match but has no answers it returns ["No answers"]. If it finds no match it
-    returns ["I don't understand"].
+    for pat, act in pa_list:
+        print(f"pattern: {pat}, source: {src}, action {act}")
+        mat = match(pat, src)
+        print(f"match: {mat}")
 
-    Args:
-        source - a phrase represented as a list of words (strings)
-
-    Returns:
-        a list of answers. Will be ["I don't understand"] if it finds no matches and
-        ["No answers"] if it finds a match but no answers
-    """
-    pass
+        if mat is not None:
+            ans = act(mat)
+            print(f"answer: {ans}")
+            return ans if ans else ["No answers"]
+    
+    return["I don't understand"]
 
 
 def query_loop() -> None:
