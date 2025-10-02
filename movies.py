@@ -435,4 +435,16 @@ movie_db: List[Tuple[str, str, int, List[str]]] = [
             "spike lee",
         ],
     ),
+    (
+        "top gun",
+        "tony scott",
+        1986,
+        [
+            "tom cruise",
+            "val kilmer",
+            "kelly mcgillis",
+            "anthony edwards",
+            "meg ryan",
+        ]
+    ),
 ]
